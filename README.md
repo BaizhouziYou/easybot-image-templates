@@ -4,13 +4,16 @@
 
 各模板独立安装、独立版本，共用经典深色与 WebGL 液态玻璃风格，支持图形化设置、内置中文字体、多档输出清晰度及自定义 CSS
 
-## 目前模板
+## 目前已有模板
 
 | 模板 | 版本 | 功能 | 使用说明 |
 | --- | --- | --- | --- |
 | 服务器在线列表 | 1.2.0 | 多服务器在线人数、玩家列表、头像源回退与服务器筛选 | [说明](EasybotImageTemplate-WebGL/README.md) |
 | 玩家统计资料卡 | 1.1.3 | EasyBot/PAPI 变量、最多 24 项统计、时间与数字格式化 | [说明](EasybotPlayerStatsTemplate-WebGL/README.md) |
 | 服务器性能监控 | 1.1.1 | 多服分组、逐服配置、Fabric/Bukkit 预设、最多 18 项指标及状态阈值 | [说明](EasybotServerPerformanceTemplate-WebGL/README.md) |
+
+###目前下载量(Easybot资源市场-图片模板分区)(截至于2026/10/18)
+<img width="662" height="297" alt="image" src="https://github.com/user-attachments/assets/827fd0fa-59e6-4389-a737-b091975e6354" />
 
 ### 服务器在线列表
 
