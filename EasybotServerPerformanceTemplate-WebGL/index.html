@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>服务器性能监控</title>
+    <link rel="icon" href="./assets/cover.png" />
+    <link rel="stylesheet" href="./assets/style.css" />
+  </head>
+  <body>
+    <main class="poster" id="poster">
+      <img class="poster-bg" id="posterBackground" alt="" />
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow" id="subtitle">Minecraft Performance</p>
+          <h1 id="title">服务器性能监控</h1>
+          <p class="description" id="description">实时查看服务器运行状态</p>
+        </div>
+        <div class="summary" id="healthSummary">
+          <span class="summary-label">综合状态</span>
+          <strong id="healthText">--</strong>
+          <small id="healthDetail">等待数据</small>
+        </div>
+      </section>
+
+      <section class="meta-row">
+        <div>
+          <span id="serverLabel">显示服务器</span>
+          <strong id="serverName">-- 台</strong>
+        </div>
+        <div>
+          <span>更新时间</span>
+          <strong id="updateTime">--:--:--</strong>
+        </div>
+        <div>
+          <span>监控指标</span>
+          <strong id="metricCount">-- 项</strong>
+        </div>
+      </section>
+
+      <section class="server-list" id="serverList">
+        <div class="loading"><span>正在获取多台服务器性能数据...</span></div>
+      </section>
+
+      <svg class="liquid-filter-defs" aria-hidden="true">
+        <defs id="liquidFilterDefs"></defs>
+      </svg>
+    </main>
+    <script src="./assets/config.js"></script>
+    <script src="./assets/app.js"></script>
+  </body>
+</html>

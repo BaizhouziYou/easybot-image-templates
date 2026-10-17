@@ -1,0 +1,32 @@
+{
+  "name": "服务器在线列表(全国内图片源)",
+  "description": "在线人数与玩家列表图片模板，支持图形化配置头像源、背景和样式",
+  "id": "server_player_count",
+  "author": [
+    "BaiZhouziYou"
+  ],
+  "version": "1.2.0",
+  "icon": "assets/cover.jpeg",
+  "dependencies": [],
+  "tag": [
+    "信息",
+    "服务器"
+  ],
+  "settings": {
+    "allow": true,
+    "path": "settings.html"
+  },
+  "template": [
+    {
+      "key": "player_count",
+      "name": "服务器人数",
+      "path": "index.html",
+      "width": 900,
+      "settings": {
+        "allow": true,
+        "path": "settings.html"
+      },
+      "no_server": true
+    }
+  ]
+}

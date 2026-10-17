@@ -1,0 +1,32 @@
+{
+  "name": "服务器性能监控",
+  "description": "查询 TPS、MSPT、CPU、内存等服务器性能指标，支持自定义 PAPI 变量、状态阈值和液态玻璃主题",
+  "id": "server_performance_dashboard",
+  "author": [
+    "BaiZhouziYou"
+  ],
+  "version": "1.1.1",
+  "icon": "assets/cover.png",
+  "dependencies": [],
+  "tag": [
+    "信息",
+    "服务器"
+  ],
+  "settings": {
+    "allow": true,
+    "path": "settings.html"
+  },
+  "template": [
+    {
+      "key": "server_performance",
+      "name": "服务器性能监控",
+      "path": "index.html",
+      "width": 900,
+      "settings": {
+        "allow": true,
+        "path": "settings.html"
+      },
+      "no_server": true
+    }
+  ]
+}

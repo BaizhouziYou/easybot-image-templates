@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>服务器人数</title>
+    <link rel="icon" href="./assets/cover.jpeg" />
+    <link rel="stylesheet" href="./assets/style.css" />
+  </head>
+  <body>
+    <main class="poster" id="poster">
+      <img class="poster-bg" id="posterBackground" alt="" />
+      <section class="hero">
+        <div>
+          <p class="eyebrow" id="subtitle">Minecraft Server</p>
+          <h1 id="title">服务器在线人数</h1>
+        </div>
+        <div class="summary" data-option="showTotalOnline">
+          <span class="summary-label">在线</span>
+          <strong id="totalOnline">--</strong>
+        </div>
+      </section>
+
+      <section class="meta-row">
+        <div data-option="showServerCount">
+          <span>服务器</span>
+          <strong id="serverCount">--</strong>
+        </div>
+        <div data-option="showCurrentTime">
+          <span>更新时间</span>
+          <strong id="updateTime">--:--</strong>
+        </div>
+        <div data-option="showOnlineStatus">
+          <span>状态</span>
+          <strong id="statusText">加载中</strong>
+        </div>
+      </section>
+
+      <section class="server-list" id="serverList">
+        <div class="loading">正在获取在线玩家...</div>
+      </section>
+    </main>
+
+    <svg class="liquid-filter-defs" aria-hidden="true" data-liquid-ignore>
+      <defs id="liquidFilterDefs"></defs>
+    </svg>
+
+    <script src="./assets/config.js"></script>
+    <script src="./assets/app.js"></script>
+  </body>
+</html>

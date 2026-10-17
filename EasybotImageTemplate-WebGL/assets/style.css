@@ -1,0 +1,720 @@
+@font-face {
+  font-family: "Template Noto Sans SC";
+  src: url("./fonts/NotoSansSC-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Template Source Han Sans SC";
+  src: url("./fonts/SourceHanSansCN-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+}
+
+:root {
+  color: #f8fafc;
+  background: #000000;
+  font-family: var(
+    --template-font-family,
+    "Microsoft YaHei",
+    "PingFang SC",
+    "Segoe UI",
+    system-ui,
+    sans-serif
+  );
+  font-synthesis: weight;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 900px;
+  min-width: 900px;
+  min-height: 0;
+  margin: 0;
+  overflow: hidden;
+  background: #000000;
+}
+
+.poster {
+  position: relative;
+  width: 900px;
+  min-height: 0;
+  padding: 36px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% -10%, rgba(255, 255, 255, 0.12), transparent 34%),
+    radial-gradient(circle at 92% 8%, rgba(255, 255, 255, 0.08), transparent 30%),
+    linear-gradient(135deg, #050507 0%, #0d1118 52%, #000000 100%);
+}
+
+.poster.has-custom-bg {
+  background: #000000;
+}
+
+.poster.has-color-bg {
+  background: var(--custom-background-color, #0b111d);
+}
+
+.poster::before {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.72)),
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.12), transparent 55%);
+  content: "";
+  pointer-events: none;
+}
+
+.poster::after {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: rgba(0, 0, 0, var(--background-dim, 0.45));
+  content: "";
+  pointer-events: none;
+}
+
+.poster-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.02);
+}
+
+.poster.has-custom-bg .poster-bg {
+  display: block;
+}
+
+.poster > :not(.poster-bg) {
+  position: relative;
+  z-index: 1;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 132px;
+  gap: 24px;
+  align-items: end;
+  margin-bottom: 22px;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: #94a3b8;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 50px;
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: 0;
+  text-shadow: 0 16px 36px rgba(0, 0, 0, 0.72), 0 0 26px rgba(255, 255, 255, 0.18);
+}
+
+.summary {
+  display: grid;
+  place-items: center;
+  width: 132px;
+  height: 112px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  background: rgba(10, 10, 10, 0.46);
+  box-shadow: inset 0 0 24px rgba(255, 255, 255, 0.05), 0 18px 42px rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.summary-label {
+  color: #cbd5e1;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.summary strong {
+  color: #ffffff;
+  font-size: 50px;
+  line-height: 0.92;
+  text-shadow: 0 0 24px rgba(255, 255, 255, 0.26);
+}
+
+.meta-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.meta-row div {
+  min-height: 74px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.055);
+  box-shadow: inset 0 0 22px rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.meta-row span {
+  display: block;
+  color: #94a3b8;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.meta-row strong {
+  display: block;
+  margin-top: 4px;
+  color: #ffffff;
+  font-size: 25px;
+  line-height: 1.25;
+}
+
+.server-list {
+  display: grid;
+  gap: 14px;
+}
+
+.server-card {
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 8px;
+  background: rgba(10, 10, 10, 0.46);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.35), inset 0 0 30px rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.server-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.server-header h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.server-header span {
+  flex: 0 0 auto;
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #e2e8f0;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.player-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.player {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  min-height: 58px;
+  padding: 8px 12px 8px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.055);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+.player img {
+  width: 42px;
+  height: 42px;
+  border-radius: 6px;
+  image-rendering: pixelated;
+  object-fit: cover;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.16);
+}
+
+.player strong {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 2px;
+  color: #f8fafc;
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.badge {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 2px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.loading,
+.empty {
+  min-height: 130px;
+  display: grid;
+  place-items: center;
+  border: 1px dashed rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  background: rgba(10, 10, 10, 0.42);
+  color: #94a3b8;
+  font-size: 22px;
+  font-weight: 800;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* liquidGL provides the refraction layer; these styles are also its WebGL fallback. */
+.poster.theme-liquid {
+  background: #050708;
+}
+
+.poster.theme-liquid::before {
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.34)),
+    radial-gradient(circle at 50% -12%, rgba(255, 255, 255, 0.14), transparent 58%);
+}
+
+.theme-liquid .eyebrow {
+  color: rgba(220, 250, 255, 0.92);
+  text-shadow: 0 0 18px rgba(89, 220, 255, 0.38);
+}
+
+.theme-liquid h1,
+.theme-liquid .server-header h2 {
+  color: #ffffff;
+  text-shadow: 0 5px 18px rgba(0, 0, 0, 0.58);
+}
+
+.theme-liquid .player strong {
+  color: #ffffff;
+  text-shadow: none;
+}
+
+.theme-liquid .summary,
+.theme-liquid .meta-row div,
+.theme-liquid .server-card,
+.theme-liquid .loading,
+.theme-liquid .empty {
+  position: relative;
+  overflow: hidden;
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(8, 15, 22, 0.32);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.36),
+    inset 1px 0 0 rgba(173, 241, 255, 0.14),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.34),
+    0 15px 34px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(18px) saturate(145%) contrast(108%);
+  -webkit-backdrop-filter: blur(18px) saturate(145%) contrast(108%);
+}
+
+.theme-liquid .liquid-surface {
+  z-index: 3;
+  isolation: isolate;
+}
+
+.theme-liquid.liquid-clear .liquid-surface {
+  background-color: rgba(208, 245, 255, 0.13);
+}
+
+.theme-liquid.liquid-tinted .liquid-surface {
+  background-color: rgba(18, 31, 40, 0.48);
+}
+
+.theme-liquid.liquid-webgl-ready .liquid-surface {
+  border-color: rgba(255, 255, 255, 0.42);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.44);
+}
+
+.theme-liquid.liquid-webgl-ready .liquid-surface::before {
+  display: none;
+}
+
+.theme-liquid.liquid-webgl-ready .liquid-surface > * {
+  position: relative;
+  z-index: 4;
+}
+
+.theme-liquid.liquid-clear .summary,
+.theme-liquid.liquid-clear .meta-row div,
+.theme-liquid.liquid-clear .server-card,
+.theme-liquid.liquid-clear .loading,
+.theme-liquid.liquid-clear .empty {
+  background: rgba(7, 14, 20, 0.24);
+  backdrop-filter: blur(13px) saturate(155%) contrast(108%);
+  -webkit-backdrop-filter: blur(13px) saturate(155%) contrast(108%);
+}
+
+.theme-liquid.liquid-tinted .summary,
+.theme-liquid.liquid-tinted .meta-row div,
+.theme-liquid.liquid-tinted .server-card,
+.theme-liquid.liquid-tinted .loading,
+.theme-liquid.liquid-tinted .empty {
+  border-color: rgba(205, 237, 245, 0.24);
+  background: rgba(8, 13, 18, 0.54);
+  backdrop-filter: blur(23px) saturate(125%) contrast(112%);
+  -webkit-backdrop-filter: blur(23px) saturate(125%) contrast(112%);
+}
+
+.theme-liquid .summary::before,
+.theme-liquid .meta-row div::before,
+.theme-liquid .server-card::before {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(120deg, rgba(255, 255, 255, 0.16), transparent 22%, transparent 76%, rgba(94, 199, 255, 0.08)),
+    radial-gradient(circle at 18% 0%, rgba(159, 244, 255, 0.12), transparent 38%);
+  content: "";
+  pointer-events: none;
+}
+
+.theme-liquid .summary > *,
+.theme-liquid .meta-row div > *,
+.theme-liquid .server-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.theme-liquid .summary {
+  border-color: rgba(255, 255, 255, 0.36);
+}
+
+.theme-liquid .summary-label,
+.theme-liquid .meta-row span {
+  color: rgba(231, 242, 246, 0.78);
+}
+
+.theme-liquid .summary strong {
+  color: #ffffff;
+  text-shadow: 0 0 22px rgba(255, 255, 255, 0.24), 0 5px 18px rgba(0, 0, 0, 0.42);
+}
+
+.theme-liquid .server-header span {
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(10, 18, 26, 0.32);
+  color: rgba(238, 252, 255, 0.94);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.34),
+    0 8px 18px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(14px) saturate(145%);
+  -webkit-backdrop-filter: blur(14px) saturate(145%);
+}
+
+.theme-liquid .player {
+  border-color: rgba(255, 255, 255, 0.19);
+  background: rgba(8, 14, 20, 0.31);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 1px 0 0 rgba(164, 238, 255, 0.08),
+    0 7px 18px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+}
+
+.theme-liquid.liquid-tinted .player {
+  background: rgba(7, 12, 17, 0.52);
+}
+
+.theme-liquid .player img {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 6px 16px rgba(0, 0, 0, 0.34);
+}
+
+.theme-liquid .badge {
+  border-color: rgba(217, 248, 255, 0.25);
+  background: rgba(16, 31, 40, 0.46);
+  color: rgba(230, 250, 255, 0.9);
+}
+
+/* Static optical material used by EasyBot/Linux and cross-origin backgrounds. */
+.theme-liquid .summary,
+.theme-liquid .meta-row div,
+.theme-liquid .server-card,
+.theme-liquid .loading,
+.theme-liquid .empty {
+  border-style: solid;
+  border-radius: 22px;
+  isolation: isolate;
+  transform: translateZ(0);
+}
+
+.theme-liquid .summary {
+  border-radius: 28px;
+}
+
+.theme-liquid .server-card {
+  border-radius: 24px;
+}
+
+.theme-liquid .summary::before,
+.theme-liquid .meta-row div::before,
+.theme-liquid .server-card::before,
+.theme-liquid .loading::before,
+.theme-liquid .empty::before {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  border-radius: inherit;
+  background:
+    radial-gradient(110% 80% at 12% -8%, rgba(255, 255, 255, 0.34), transparent 42%),
+    radial-gradient(80% 70% at 96% 112%, rgba(104, 198, 255, 0.16), transparent 50%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.15), transparent 28%, transparent 72%, rgba(255, 255, 255, 0.08));
+  content: "";
+  pointer-events: none;
+}
+
+.theme-liquid .summary::after,
+.theme-liquid .meta-row div::after,
+.theme-liquid .server-card::after,
+.theme-liquid .loading::after,
+.theme-liquid .empty::after {
+  position: absolute;
+  inset: 1px;
+  z-index: 0;
+  border-radius: inherit;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    inset 1px 0 0 rgba(255, 255, 255, 0.12),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  content: "";
+  pointer-events: none;
+}
+
+.theme-liquid .summary > *,
+.theme-liquid .meta-row div > *,
+.theme-liquid .server-card > *,
+.theme-liquid .loading > *,
+.theme-liquid .empty > * {
+  position: relative;
+  z-index: 2;
+}
+
+.theme-liquid.liquid-clear .summary,
+.theme-liquid.liquid-clear .meta-row div,
+.theme-liquid.liquid-clear .server-card,
+.theme-liquid.liquid-clear .loading,
+.theme-liquid.liquid-clear .empty {
+  border-color: rgba(255, 255, 255, 0.42);
+  background: rgba(230, 247, 255, 0.105);
+  box-shadow:
+    0 16px 34px rgba(0, 0, 0, 0.18),
+    0 1px 0 rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(8px) saturate(175%) brightness(1.08);
+  -webkit-backdrop-filter: blur(8px) saturate(175%) brightness(1.08);
+}
+
+.theme-liquid.liquid-tinted .summary,
+.theme-liquid.liquid-tinted .meta-row div,
+.theme-liquid.liquid-tinted .server-card,
+.theme-liquid.liquid-tinted .loading,
+.theme-liquid.liquid-tinted .empty {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(22, 24, 29, 0.72);
+  box-shadow:
+    0 18px 38px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(24px) saturate(125%) contrast(1.12);
+  -webkit-backdrop-filter: blur(24px) saturate(125%) contrast(1.12);
+}
+
+.theme-liquid.liquid-tinted .summary::before,
+.theme-liquid.liquid-tinted .meta-row div::before,
+.theme-liquid.liquid-tinted .server-card::before {
+  opacity: 0.52;
+}
+
+.theme-liquid .player {
+  border-radius: 14px;
+}
+
+.theme-liquid.liquid-clear .player {
+  border-color: rgba(255, 255, 255, 0.26);
+  background: rgba(241, 250, 255, 0.13);
+  backdrop-filter: blur(6px) saturate(165%);
+  -webkit-backdrop-filter: blur(6px) saturate(165%);
+}
+
+.theme-liquid.liquid-tinted .player {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(12, 14, 18, 0.62);
+  backdrop-filter: blur(18px) saturate(120%);
+  -webkit-backdrop-filter: blur(18px) saturate(120%);
+}
+
+.theme-liquid.liquid-clear .summary-label,
+.theme-liquid.liquid-clear .meta-row span {
+  color: rgba(244, 252, 255, 0.9);
+}
+
+.theme-liquid.liquid-tinted .summary-label,
+.theme-liquid.liquid-tinted .meta-row span {
+  color: rgba(224, 228, 235, 0.72);
+}
+
+.liquid-filter-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* EasyBot-safe refraction: an aligned background slice is displaced at the lens edge. */
+.theme-liquid.liquid-static-refraction .liquid-surface {
+  overflow: hidden;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.theme-liquid.liquid-static-refraction .liquid-surface::before {
+  display: none;
+}
+
+.theme-liquid.liquid-static-refraction .liquid-refraction-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  clip-path: var(--liquid-surface-clip);
+  filter: var(--liquid-static-filter);
+  pointer-events: none;
+}
+
+.theme-liquid.liquid-static-refraction .hero,
+.theme-liquid.liquid-static-refraction .meta-row,
+.theme-liquid.liquid-static-refraction .server-list {
+  z-index: 3;
+}
+
+/* The three information cells stay optically clear and never enter the refraction canvas. */
+.theme-liquid.liquid-static-refraction .meta-row .liquid-meta-surface {
+  border-radius: 18px;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  filter: none;
+}
+
+.theme-liquid.liquid-static-refraction .meta-row .liquid-meta-surface::before {
+  display: none;
+}
+
+.theme-liquid.liquid-static-refraction.liquid-clear .meta-row .liquid-meta-surface {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(7, 12, 18, 0.14);
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+.theme-liquid.liquid-static-refraction.liquid-tinted .meta-row .liquid-meta-surface {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(14, 16, 20, 0.64);
+  box-shadow:
+    0 12px 26px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.theme-liquid.liquid-static-refraction .meta-row .liquid-meta-surface::after {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 48%);
+  box-shadow: none;
+}
+
+.theme-liquid.liquid-static-refraction.liquid-clear .liquid-surface {
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.018);
+  box-shadow:
+    0 14px 32px rgba(0, 0, 0, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.34);
+}
+
+.theme-liquid.liquid-static-refraction.liquid-clear .liquid-surface::before {
+  opacity: 1;
+  transform: none;
+}
+
+.theme-liquid.liquid-static-refraction.liquid-tinted .liquid-surface {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(14, 16, 20, 0.5);
+  box-shadow:
+    0 16px 34px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.theme-liquid.liquid-static-refraction.liquid-tinted .liquid-surface::before {
+  opacity: 0.42;
+  transform: none;
+}
+
+.theme-liquid.liquid-static-refraction.liquid-tinted .liquid-surface::after {
+  background:
+    linear-gradient(rgba(4, 7, 12, 0.12), rgba(4, 7, 12, 0.12)),
+    radial-gradient(70% 34% at 20% 0, rgba(255, 255, 255, 0.12), transparent 74%),
+    radial-gradient(60% 28% at 84% 100%, rgba(95, 180, 240, 0.06), transparent 80%);
+}
+
+.theme-liquid.liquid-static-refraction .liquid-surface::after {
+  inset: 1px;
+  border: 0;
+  background:
+    linear-gradient(rgba(5, 9, 14, 0.1), rgba(5, 9, 14, 0.1)),
+    radial-gradient(72% 36% at 20% 0, rgba(255, 255, 255, 0.2), transparent 72%),
+    radial-gradient(64% 30% at 84% 100%, rgba(116, 204, 255, 0.08), transparent 78%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+}
+
+.theme-liquid .loading,
+.theme-liquid .empty {
+  color: rgba(242, 248, 255, 0.9);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.62);
+}
+
+.theme-liquid.liquid-static-refraction .summary-label,
+.theme-liquid.liquid-static-refraction .meta-row span,
+.theme-liquid.liquid-static-refraction .summary strong,
+.theme-liquid.liquid-static-refraction .meta-row strong {
+  text-shadow: 0 2px 9px rgba(0, 0, 0, 0.78);
+}

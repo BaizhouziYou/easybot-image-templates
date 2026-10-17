@@ -1,0 +1,26 @@
+# 仅纳入模板合集，本地压缩包、服务和图库保留在工作目录。
+/*
+!/.gitignore
+!/.gitattributes
+!/README.md
+!/LICENSE
+!/NOTICE.md
+!/THIRD_PARTY_NOTICES.md
+!/docs/
+!/EasybotImageTemplate-WebGL/
+!/EasybotPlayerStatsTemplate-WebGL/
+!/EasybotServerPerformanceTemplate-WebGL/
+*.zip
+*.tgz
+*.tmp
+node_modules/
+__pycache__/
+.env
+.env.*
+*.log
+# 公开仓库仅包含模板源码与预览，不纳入打包和测试工具。
+/EasybotImageTemplate-WebGL/build.ps1
+/EasybotPlayerStatsTemplate-WebGL/build.ps1
+/EasybotPlayerStatsTemplate-WebGL/qa/*.js
+/EasybotServerPerformanceTemplate-WebGL/build.ps1
+/EasybotServerPerformanceTemplate-WebGL/qa-performance-template.js

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>玩家统计资料卡</title>
+    <link rel="icon" href="./assets/cover.png" />
+    <link rel="stylesheet" href="./assets/style.css" />
+  </head>
+  <body>
+    <main class="poster" id="poster">
+      <img class="poster-bg" id="posterBackground" alt="" />
+
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow" id="subtitle">Minecraft Player</p>
+          <h1 id="title">你好，Steve!</h1>
+          <p class="description" id="description">这是你的统计数据</p>
+        </div>
+        <div class="summary" data-option="showAvatar">
+          <img id="playerAvatar" data-avatar alt="" />
+        </div>
+      </section>
+
+      <section class="meta-row">
+        <div class="identity-card">
+          <span id="playerLabel">玩家名称</span>
+          <strong id="playerName">--</strong>
+        </div>
+      </section>
+
+      <section class="server-list">
+        <article class="server-card stats-panel">
+          <header class="server-header">
+            <div>
+              <p class="section-kicker">Player Statistics</p>
+              <h2>生涯统计</h2>
+            </div>
+            <span id="statCount">16 项</span>
+          </header>
+          <div class="stats-grid" id="statsGrid">
+            <div class="loading"><span>正在获取玩家统计...</span></div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <svg class="liquid-filter-defs" aria-hidden="true" data-liquid-ignore>
+      <defs id="liquidFilterDefs"></defs>
+    </svg>
+
+    <script src="./assets/config.js"></script>
+    <script src="./assets/app.js"></script>
+  </body>
+</html>

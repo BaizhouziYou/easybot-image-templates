@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>玩家统计资料卡配置</title>
+    <link rel="icon" href="./assets/cover.png" />
+    <link rel="stylesheet" href="./assets/settings.css" />
+  </head>
+  <body>
+    <main class="settings-page">
+      <header class="page-header"><h1>玩家统计资料卡配置</h1></header>
+      <nav class="top-tabs" aria-label="页面切换">
+        <button class="tab is-active" type="button" data-tab="config">配置</button>
+        <button class="tab" type="button" data-tab="preview">预览编辑</button>
+      </nav>
+
+      <form id="settingsForm" class="panel-stack">
+        <section class="tab-page is-active" data-page="config">
+          <section class="panel">
+            <details open>
+              <summary>基础显示设置</summary>
+              <div class="panel-body grid-2">
+                <label class="field"><span>问候标题</span><input name="title" type="text" /><small class="field-help">使用 <code>{name}</code> 插入当前玩家名。</small></label>
+                <label class="field"><span>标题上方信息</span><input name="subtitle" type="text" /></label>
+                <label class="field full"><span>说明文字</span><input name="description" type="text" /></label>
+                <label class="field full"><span>玩家名称标签</span><input name="playerLabel" type="text" /></label>
+                <label class="field full"><span>内置预览玩家名</span><input name="previewPlayerName" type="text" /><small class="field-help">仅用于配置页预览；正式渲染会自动读取触发消息中的玩家。</small></label>
+                <label class="field full">
+                  <span>界面主题</span>
+                  <select name="theme"><option value="classic">经典深色（默认）</option><option value="liquid">液态玻璃（会显著拉长渲染时间）</option></select>
+                </label>
+                <label class="field full">
+                  <span>渲染清晰度（分辨率）</span>
+                  <select name="renderScale">
+                    <option value="1">标准 1×（900px，速度最快）</option><option value="1.5">高清 1.5×（1350px，推荐）</option><option value="2">超清 2×（1800px，速度较慢）</option><option value="2.5">极清 2.5×（2250px，性能占用较高）</option><option value="3">极清 3×（2700px，性能占用最高）</option>
+                  </select>
+                  <small class="field-help">只提高输出像素，不改变排版；档位越高，性能占用和渲染耗时越高。</small>
+                </label>
+                <label class="field full">
+                  <span>字体</span>
+                  <select name="fontFamily"><option value="system">系统默认（加载最快）</option><option value="noto-sans-sc">Noto Sans SC（内置）</option><option value="source-han-sans">Source Han Sans SC / 思源黑体（内置）</option></select>
+                </label>
+                <label class="field full" data-theme-field="liquid"><span>液态玻璃外观</span><select name="liquidAppearance"><option value="clear">清澈（背景更通透）</option><option value="tinted">着色（对比度更高）</option></select></label>
+                <label class="field full" data-theme-field="liquid"><span>边缘折射范围：<output data-range-value="liquidEdgeRefractionRange">100%</output></span><input name="liquidEdgeRefractionRange" type="range" min="50" max="150" step="5" /></label>
+                <label class="field full" data-theme-field="liquid"><span>光照方向：<output data-range-value="liquidLightDirection">315°（左上）</output></span><input name="liquidLightDirection" type="range" min="0" max="360" step="15" /></label>
+                <label class="switch"><input name="showAvatar" type="checkbox" /><span>显示玩家头像</span></label>
+              </div>
+            </details>
+          </section>
+
+          <section class="panel">
+            <details>
+              <summary>统计项目</summary>
+              <div class="panel-body grid-2">
+                <label class="field"><span>距离显示方式</span><select name="distanceDisplayMode"><option value="compact">简略显示（自动使用 m / km）</option><option value="full">完整显示（例如 59770.65 m）</option></select><small class="field-help">自动识别 <code>*_ONE_CM</code> 距离变量。</small></label>
+                <label class="field"><span>大数显示方式</span><select name="largeNumberDisplayMode"><option value="compact">简略显示（例如 40.1k）</option><option value="full">完整显示（例如 40092）</option></select><small class="field-help">游戏时间与距离不受此项影响。</small></label>
+                <label class="switch full"><input name="useThousandsSeparator" type="checkbox" /><span>完整数字使用千位分隔符（例如 40,092）</span></label>
+                <label class="field full"><span>统计项目与变量</span><textarea name="statsConfig" rows="17" spellcheck="false"></textarea><small class="field-help">每行填写“显示名称|变量”，最多 24 项。模板会把全部变量合并为一次请求，避免逐项查询拖慢渲染。</small></label>
+                <div class="hint full"><strong>统计项可使用 PAPI 变量；支持 <code>&amp;#RRGGBB</code>、<code>§x§R§R§G§G§B§B</code> 等 HEX 颜色码；游戏时间会自动换算为天、时、分、秒，未解析变量会统一显示为 <code>--</code>。</strong></div>
+              </div>
+            </details>
+          </section>
+
+          <section class="panel">
+            <details>
+              <summary>玩家头像设置</summary>
+              <div class="panel-body grid-2 avatar-settings-grid">
+                <label class="field"><span>玩家头像源</span><select name="avatarProvider" id="avatarProvider"><option value="imgd">新亭泪（国内镜像源）</option><option value="blessing">Blessing Skin 皮肤站</option><option value="custom">自定义头像地址</option><option value="mixed">混合来源（按顺序自动回退）</option></select></label>
+                <div class="source-note source-note-compact" data-provider-field="imgd mixed"><strong><a href="https://xintinglei.cn" target="_blank" rel="noreferrer">新亭泪国内镜像源</a></strong></div>
+                <div class="source-note full" data-provider-field="mixed"><strong>按下方顺序逐级尝试，空配置和重复来源会自动跳过。</strong></div>
+                <label class="field" data-provider-field="mixed"><span>第一来源</span><select name="mixedAvatarSource1"><option value="imgd">新亭泪（国内镜像源）</option><option value="blessing">Blessing Skin 皮肤站</option><option value="custom">自定义头像地址</option><option value="none">不使用</option></select></label>
+                <label class="field" data-provider-field="mixed"><span>第二来源</span><select name="mixedAvatarSource2"><option value="imgd">新亭泪（国内镜像源）</option><option value="blessing">Blessing Skin 皮肤站</option><option value="custom">自定义头像地址</option><option value="none">不使用</option></select></label>
+                <label class="field" data-provider-field="mixed"><span>第三来源</span><select name="mixedAvatarSource3"><option value="imgd">新亭泪（国内镜像源）</option><option value="blessing">Blessing Skin 皮肤站</option><option value="custom">自定义头像地址</option><option value="none">不使用</option></select></label>
+                <label class="field" data-provider-field="mixed"><span>每个来源最长等待时间</span><select name="avatarSourceTimeoutSeconds"><option value="1">1 秒</option><option value="2">2 秒</option><option value="3">3 秒（推荐）</option><option value="5">5 秒</option><option value="8">8 秒</option></select></label>
+                <label class="field full" data-provider-field="mixed"><span>imgd 未找到玩家时返回的默认 UUID</span><input name="imgdMissingPlayerUuid" type="text" /></label>
+                <label class="field" data-provider-field="imgd mixed"><span>国内镜像头像样式</span><select name="imgdMode"><option value="helm">显示帽子/头发外层（默认，效果最好）</option><option value="avatar">普通头像</option></select></label>
+                <label class="field" data-provider-field="blessing mixed"><span>Blessing Skin 头像尺寸</span><select name="avatarSize"><option value="64">64</option><option value="96">96</option><option value="128">128</option><option value="256">256</option></select></label>
+                <label class="field full" data-provider-field="blessing mixed"><span>Blessing Skin 服务地址</span><input name="avatarBaseUrl" type="url" placeholder="例如 https://skin.example.cn" /><small class="field-help">留空时跳过该来源；填写皮肤站根地址即可。</small></label>
+                <label class="switch" data-provider-field="blessing mixed"><input name="blessing3d" type="checkbox" /><span>使用 3D 头像</span></label>
+                <label class="field full" data-provider-field="custom mixed"><span>自定义头像地址模板</span><input name="customAvatarUrl" type="text" placeholder="https://example.cn/avatar/{name}?size={size}" /></label>
+              </div>
+            </details>
+          </section>
+
+          <section class="panel">
+            <details>
+              <summary>背景设置</summary>
+              <div class="panel-body grid-2">
+                <label class="field"><span>背景来源</span><select name="backgroundMode" id="backgroundMode"><option value="random">随机图片（默认）</option><option value="default">默认背景</option><option value="custom">自定义图片地址</option></select></label>
+                <label class="field" data-background-field="random"><span>随机图片分类</span><select name="randomBackgroundCategory"><option value="moez">萌图</option><option value="pc">电脑横图</option><option value="mp">手机竖图</option></select></label>
+                <label class="field full" data-background-field="custom"><span>背景图片地址</span><input name="backgroundUrl" type="text" placeholder="https://example.cn/background.webp" /></label>
+                <label class="field full" data-background-field="random"><span>随机图片 API</span><input name="randomBackgroundApi" type="text" /></label>
+                <label class="field full"><span>背景暗化程度：<output data-range-value="backgroundDim">45%</output></span><input name="backgroundDim" type="range" min="0" max="80" step="5" /></label>
+              </div>
+            </details>
+          </section>
+
+          <section class="panel">
+            <details><summary>自定义 CSS</summary><div class="panel-body grid-2"><label class="field full"><span>追加到模板页面的 CSS</span><textarea name="customCss" rows="8" spellcheck="false" placeholder=".stat-card { color: #ffffff; }"></textarea></label></div></details>
+          </section>
+
+          <section class="panel">
+            <details>
+              <summary>缓存与性能</summary>
+              <div class="panel-body grid-2">
+                <label class="switch"><input name="enableDataCache" type="checkbox" /><span>缓存玩家统计数据</span></label>
+                <label class="field"><span>统计缓存时间</span><select name="dataCacheSeconds"><option value="15">15 秒</option><option value="30">30 秒（推荐）</option><option value="60">1 分钟</option><option value="300">5 分钟</option></select></label>
+                <label class="switch"><input name="enableAvatarCache" type="checkbox" /><span>缓存头像</span></label>
+                <label class="field"><span>头像缓存时间</span><select name="avatarCacheMinutes"><option value="10">10 分钟</option><option value="60">1 小时（推荐）</option><option value="360">6 小时</option><option value="1440">24 小时</option></select></label>
+                <div class="debug-actions full"><button type="button" class="secondary" id="clearCacheButton">立即清空缓存</button></div>
+              </div>
+            </details>
+          </section>
+
+          <section class="panel">
+            <details>
+              <summary>调试与日志</summary>
+              <div class="panel-body debug-panel">
+                <label class="switch"><input name="debugMode" id="debugMode" type="checkbox" /><span>开启 Debug 日志</span></label>
+                <div class="hint">默认关闭。开启后记录配置、EasyBot 统计请求、缓存、头像、背景、字体、WebGL 与渲染视口日志。</div>
+                <div class="debug-actions"><button type="button" class="secondary" id="exportLogsButton">导出日志</button><button type="button" class="danger" id="clearLogsButton">清空日志</button></div>
+              </div>
+            </details>
+          </section>
+        </section>
+
+        <section class="tab-page preview-editor" data-page="preview">
+          <div class="preview-edit-grid">
+            <aside class="preview-menu">
+              <h2>基础配置</h2>
+              <button type="button" class="menu-item is-active" data-preview-section="display">基础显示设置</button>
+              <button type="button" class="menu-item" data-preview-section="stats">统计项目设置</button>
+              <button type="button" class="menu-item" data-preview-section="avatar">玩家头像设置</button>
+              <button type="button" class="menu-item" data-preview-section="background">背景设置</button>
+              <button type="button" class="menu-item" data-preview-section="css">自定义 CSS</button>
+            </aside>
+
+            <aside class="preview-tools">
+              <section class="preview-section is-active" data-preview-panel="display">
+                <h2>调试配置</h2>
+                <label class="field">
+                  <span>问候标题</span>
+                  <input data-mirror="title" type="text" />
+                  <small class="field-help">使用 <code>{name}</code> 插入当前玩家名。</small>
+                </label>
+                <label class="field">
+                  <span>标题上方信息</span>
+                  <input data-mirror="subtitle" type="text" />
+                </label>
+                <label class="field">
+                  <span>说明文字</span>
+                  <input data-mirror="description" type="text" />
+                </label>
+                <label class="field">
+                  <span>玩家名称标签</span>
+                  <input data-mirror="playerLabel" type="text" />
+                </label>
+                <label class="field">
+                  <span>内置预览玩家名</span>
+                  <input data-mirror="previewPlayerName" type="text" />
+                </label>
+                <label class="field">
+                  <span>界面主题</span>
+                  <select data-mirror="theme">
+                    <option value="classic">经典深色（默认）</option>
+                    <option value="liquid">液态玻璃（会显著拉长渲染时间）</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>渲染清晰度（分辨率）</span>
+                  <select data-mirror="renderScale">
+                    <option value="1">标准 1×（900px，速度最快）</option>
+                    <option value="1.5">高清 1.5×（1350px，推荐）</option>
+                    <option value="2">超清 2×（1800px，速度较慢）</option>
+                    <option value="2.5">极清 2.5×（2250px，性能占用较高）</option>
+                    <option value="3">极清 3×（2700px，性能占用最高）</option>
+                  </select>
+                  <small class="field-help">内置预览保持原尺寸；提高输出清晰度会增加性能占用和渲染耗时。</small>
+                </label>
+                <label class="field">
+                  <span>字体</span>
+                  <select data-mirror="fontFamily">
+                    <option value="system">系统默认</option>
+                    <option value="noto-sans-sc">Noto Sans SC</option>
+                    <option value="source-han-sans">Source Han Sans SC / 思源黑体</option>
+                  </select>
+                  <small class="field-help">内置字体不依赖远程网络。</small>
+                </label>
+                <label class="field" data-preview-theme-field="liquid">
+                  <span>液态玻璃外观</span>
+                  <select data-mirror="liquidAppearance">
+                    <option value="clear">清澈（背景更通透）</option>
+                    <option value="tinted">着色（对比度更高）</option>
+                  </select>
+                </label>
+                <label class="field" data-preview-theme-field="liquid">
+                  <span>边缘折射范围：<output data-range-value="liquidEdgeRefractionRange">100%</output></span>
+                  <input data-mirror="liquidEdgeRefractionRange" type="range" min="50" max="150" step="5" />
+                  <small class="field-help">100% 为默认效果。</small>
+                </label>
+                <label class="field" data-preview-theme-field="liquid">
+                  <span>光照方向：<output data-range-value="liquidLightDirection">315°（左上）</output></span>
+                  <input data-mirror="liquidLightDirection" type="range" min="0" max="360" step="15" />
+                  <small class="field-help">0° 为上方，90° 为右侧。</small>
+                </label>
+                <label class="switch">
+                  <input data-mirror="showAvatar" type="checkbox" />
+                  <span>显示玩家头像</span>
+                </label>
+              </section>
+
+              <section class="preview-section" data-preview-panel="stats">
+                <h2>统计项目设置</h2>
+                <label class="field">
+                  <span>距离显示方式</span>
+                  <select data-mirror="distanceDisplayMode">
+                    <option value="compact">简略显示（自动使用 m / km）</option>
+                    <option value="full">完整显示（完整米数）</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>大数显示方式</span>
+                  <select data-mirror="largeNumberDisplayMode">
+                    <option value="compact">简略显示（例如 40.1k）</option>
+                    <option value="full">完整显示（无单位）</option>
+                  </select>
+                </label>
+                <label class="switch">
+                  <input data-mirror="useThousandsSeparator" type="checkbox" />
+                  <span>完整数字使用千位分隔符</span>
+                </label>
+                <label class="field">
+                  <span>统计项目与变量</span>
+                  <textarea data-mirror="statsConfig" rows="17" spellcheck="false"></textarea>
+                  <small class="field-help">每行填写“显示名称|变量”，最多 24 项。</small>
+                </label>
+              </section>
+
+              <section class="preview-section" data-preview-panel="avatar">
+                <h2>玩家头像设置</h2>
+                <label class="field">
+                  <span>玩家头像源</span>
+                  <select data-mirror="avatarProvider">
+                    <option value="imgd">新亭泪（国内镜像源）</option>
+                    <option value="blessing">Blessing Skin 皮肤站</option>
+                    <option value="custom">自定义头像地址</option>
+                    <option value="mixed">混合来源（按顺序自动回退）</option>
+                  </select>
+                </label>
+                <div class="source-note" data-preview-provider-field="mixed">
+                  <strong>按顺序自动回退，最后使用史蒂夫头像。</strong>
+                </div>
+                <label class="field" data-preview-provider-field="mixed">
+                  <span>第一来源</span>
+                  <select data-mirror="mixedAvatarSource1">
+                    <option value="imgd">新亭泪（国内镜像源）</option>
+                    <option value="blessing">Blessing Skin 皮肤站</option>
+                    <option value="custom">自定义头像地址</option>
+                    <option value="none">不使用</option>
+                  </select>
+                </label>
+                <label class="field" data-preview-provider-field="mixed">
+                  <span>第二来源</span>
+                  <select data-mirror="mixedAvatarSource2">
+                    <option value="imgd">新亭泪（国内镜像源）</option>
+                    <option value="blessing">Blessing Skin 皮肤站</option>
+                    <option value="custom">自定义头像地址</option>
+                    <option value="none">不使用</option>
+                  </select>
+                </label>
+                <label class="field" data-preview-provider-field="mixed">
+                  <span>第三来源</span>
+                  <select data-mirror="mixedAvatarSource3">
+                    <option value="imgd">新亭泪（国内镜像源）</option>
+                    <option value="blessing">Blessing Skin 皮肤站</option>
+                    <option value="custom">自定义头像地址</option>
+                    <option value="none">不使用</option>
+                  </select>
+                </label>
+                <label class="field" data-preview-provider-field="mixed">
+                  <span>每个来源最长等待时间</span>
+                  <select data-mirror="avatarSourceTimeoutSeconds">
+                    <option value="1">1 秒</option>
+                    <option value="2">2 秒</option>
+                    <option value="3">3 秒（推荐）</option>
+                    <option value="5">5 秒</option>
+                    <option value="8">8 秒</option>
+                  </select>
+                </label>
+                <label class="field" data-preview-provider-field="mixed">
+                  <span>imgd 未找到玩家时返回的默认 UUID</span>
+                  <input data-mirror="imgdMissingPlayerUuid" type="text" />
+                </label>
+                <div class="source-note" data-preview-provider-field="imgd mixed">
+                  <strong><a href="https://xintinglei.cn" target="_blank" rel="noreferrer">新亭泪</a><span>国内镜像源</span></strong>
+                </div>
+                <label class="field" data-preview-provider-field="imgd mixed">
+                  <span>国内镜像头像样式</span>
+                  <select data-mirror="imgdMode">
+                    <option value="helm">显示帽子/头发外层（默认，效果最好）</option>
+                    <option value="avatar">普通头像</option>
+                  </select>
+                </label>
+                <label class="field" data-preview-provider-field="blessing mixed">
+                  <span>Blessing Skin 服务地址</span>
+                  <input data-mirror="avatarBaseUrl" type="url" />
+                </label>
+                <label class="field" data-preview-provider-field="blessing mixed">
+                  <span>Blessing Skin 头像尺寸</span>
+                  <select data-mirror="avatarSize">
+                    <option value="64">64</option>
+                    <option value="96">96</option>
+                    <option value="128">128</option>
+                    <option value="256">256</option>
+                  </select>
+                </label>
+                <label class="switch" data-preview-provider-field="blessing mixed">
+                  <input data-mirror="blessing3d" type="checkbox" />
+                  <span>使用 Blessing Skin 3D 头像</span>
+                </label>
+                <label class="field" data-preview-provider-field="custom mixed">
+                  <span>自定义头像地址模板</span>
+                  <input data-mirror="customAvatarUrl" type="text" />
+                </label>
+              </section>
+
+              <section class="preview-section" data-preview-panel="background">
+                <h2>背景预览</h2>
+                <label class="field">
+                  <span>背景来源</span>
+                  <select data-mirror="backgroundMode">
+                    <option value="random">随机图片</option>
+                    <option value="default">默认背景</option>
+                    <option value="custom">自定义图片地址</option>
+                  </select>
+                </label>
+                <label class="field" data-preview-background-field="random">
+                  <span>随机图片分类</span>
+                  <select data-mirror="randomBackgroundCategory">
+                    <option value="moez">萌图</option>
+                    <option value="pc">电脑横图</option>
+                    <option value="mp">手机竖图</option>
+                  </select>
+                </label>
+                <label class="field" data-preview-background-field="random">
+                  <span>随机图片 API</span>
+                  <input data-mirror="randomBackgroundApi" type="text" />
+                </label>
+                <label class="field" data-preview-background-field="custom">
+                  <span>背景图片地址</span>
+                  <input data-mirror="backgroundUrl" type="text" />
+                </label>
+                <label class="field">
+                  <span>背景暗化程度：<output data-range-value="backgroundDim">45%</output></span>
+                  <input data-mirror="backgroundDim" type="range" min="0" max="80" step="5" />
+                </label>
+              </section>
+
+              <section class="preview-section" data-preview-panel="css">
+                <h2>自定义 CSS</h2>
+                <label class="field">
+                  <span>CSS 代码</span>
+                  <textarea data-mirror="customCss" rows="10" spellcheck="false"></textarea>
+                </label>
+              </section>
+            </aside>
+          </div>
+
+          <section class="preview-frame-wrap">
+            <iframe id="previewFrame" title="玩家统计模板预览" src="./index.html" scrolling="no"></iframe>
+          </section>
+        </section>
+
+        <footer class="actions"><button type="button" class="secondary" id="resetButton">恢复默认</button><button type="button" class="secondary refresh-only" id="refreshPreviewButton">刷新预览</button><button type="submit" class="primary">保存配置</button></footer>
+      </form>
+    </main>
+    <script src="./assets/config.js"></script>
+    <script src="./assets/settings.js"></script>
+  </body>
+</html>
