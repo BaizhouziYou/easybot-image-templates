@@ -54,5 +54,5 @@ Copyright © 2026 BaiZhouziYou
 
 封面和预览图片单独列于 [媒体素材说明](docs/ASSET-LICENSES.md)，不因源码开源而获得第三方素材的再授权
 
-## 问题反馈与建议、
+## 问题反馈与建议
 仓库 Issues 或 reedtxt@icloud.com
