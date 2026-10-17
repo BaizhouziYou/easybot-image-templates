@@ -12,7 +12,7 @@
 | 玩家统计资料卡 | 1.1.3 | EasyBot/PAPI 变量、最多 24 项统计、时间与数字格式化 | [说明](EasybotPlayerStatsTemplate-WebGL/README.md) |
 | 服务器性能监控 | 1.1.1 | 多服分组、逐服配置、Fabric/Bukkit 预设、最多 18 项指标及状态阈值 | [说明](EasybotServerPerformanceTemplate-WebGL/README.md) |
 
-###目前下载量(Easybot资源市场-图片模板分区)(截至于2026/10/18)
+### 目前下载量(Easybot资源市场-图片模板分区)(截至于2026/10/18)
 <img width="662" height="297" alt="image" src="https://github.com/user-attachments/assets/827fd0fa-59e6-4389-a737-b091975e6354" />
 
 ### 服务器在线列表
